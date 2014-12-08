@@ -4,11 +4,16 @@ An internal tool for spawning Docker hosts on the cloud. Supports Amazon's EC2, 
 
 > *Capesize* ships are the largest cargo ships; ships which are too large to transit the Suez Canal (Suezmax limits) or Panama Canal (Panamax limits), and so have to pass either the Cape of Good Hope or Cape Horn to transverse between oceans. [Wikipedia](http://en.wikipedia.org/wiki/Capesize)
 
+#### Commands
+* capesize *create* <provider> <num hosts>
+* capesize *list* <provider>
+
 #### Getting started
 
 ```
 go build
-./capesize <provider> <num hosts>
+./capesize create amazon 5
+./capesize list amazon
 ```
 
 ###### Example:
@@ -43,8 +48,6 @@ IDENTITY_FILE=~/.ssh/jenkins_id_rsa" \
 * Better error handling. i.e. refactor excessive & abusive use of `panic`
 * Better logging
 * Add GCE support & ensure design is flexible across providers
-* Better machine tagging (add/remove status tags)
-* CLI tool for monitoring status of running hosts
 
 #### License
 MIT
