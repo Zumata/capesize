@@ -24,21 +24,21 @@ IDENTITY_FILE=<insert>~/.ssh/jenkins_id_rsa" \
 
 ###### Required ENV vars:
 
-AWS_ACCESS_KEY_ID
-AWS_SECRET_ACCESS_KEY
-SECURITY_GROUP
-EC2_KEY_PAIR_NAME
-IDENTITY_FILE
-DEVELOPER_KEYS
+* AWS_ACCESS_KEY_ID
+* AWS_SECRET_ACCESS_KEY
+* SECURITY_GROUP
+* EC2_KEY_PAIR_NAME
+* IDENTITY_FILE
+* DEVELOPER_KEYS
 
 ###### Optional ENV vars (default):
 
-BUILD_IDENTIFIER (capesize)
-EC2_IMAGE_ID (ami-56b7eb04) - Amazon docker ready AMI
-EC2_HOST_USER (ec2-user)
-EC2_INSTANCE_TYPE (m3.medium)
-EC2_AVAILABILITY_ZONE (ap-southeast-1b)
-REMOTE_DIR_PATH (opt)
+* BUILD_IDENTIFIER (capesize)
+* EC2_IMAGE_ID (ami-56b7eb04) - Amazon docker ready AMI
+* EC2_HOST_USER (ec2-user)
+* EC2_INSTANCE_TYPE (m3.medium)
+* EC2_AVAILABILITY_ZONE (ap-southeast-1b)
+* REMOTE_DIR_PATH (opt)
 
 #### Todo
 * Better error handling. i.e. refactor excessive & abusive use of `panic`
