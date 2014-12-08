@@ -9,6 +9,11 @@
 		{
 			"ImportPath": "github.com/crowdmob/goamz/ec2",
 			"Rev": "d4fe3562c5ecedfd7984f5d4508d74cda77539bc"
+		},
+		{
+			"ImportPath": "github.com/jessevdk/go-flags",
+			"Comment": "v1-243-g1f8fc78",
+			"Rev": "1f8fc78104c465b25629ed0fa9bbd4dffb39dd8e"
 		}
 	]
 }
