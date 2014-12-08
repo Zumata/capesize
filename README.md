@@ -10,7 +10,6 @@ An internal tool for spawning Docker hosts on the cloud. Supports Amazon's EC2, 
 go build
 ./capesize <provider> <num hosts>
 ```
-(where X is the number of docker hosts - defaults to 1)
 
 example:
 ```
