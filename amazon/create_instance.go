@@ -141,8 +141,8 @@ func (i *SpawnedEC2Instance) LogStatus() {
 	log.Println("Current State: ", i.InstanceState)
 }
 
-func (i *SpawnedEC2Instance) AddSuccessTag() {
-	_, err := i.client.CreateTags([]string{i.InstanceId}, []ec2.Tag{{Key: "Name", Value: i.machine.SuccessTag()}})
+func (i *SpawnedEC2Instance) AddOrUpdateTag(key, val string) {
+	_, err := i.client.CreateTags([]string{i.InstanceId}, []ec2.Tag{{key, val}})
 	if err != nil {
 		panic(err)
 	}
@@ -151,8 +151,8 @@ func (i *SpawnedEC2Instance) AddSuccessTag() {
 func (a *Amazon) CreateInstance(machine *core.Machine, done chan bool) {
 
 	ec2Instance := NewSpawnedEC2Instance(machine, a.Client, a.Config)
-
 	ec2Instance.Run()
+	ec2Instance.AddOrUpdateTag("capesize", "launching")
 
 	// wait for DNS
 	for {
@@ -191,7 +191,8 @@ func (a *Amazon) CreateInstance(machine *core.Machine, done chan bool) {
 	machine.IPAddress = ec2Instance.IPAddress
 
 	RunAmazonDockerSetup(machine)
-	ec2Instance.AddSuccessTag()
+	ec2Instance.AddOrUpdateTag("Name", machine.SuccessTag())
+	ec2Instance.AddOrUpdateTag("capesize", "ready")
 
 	done <- true
 
