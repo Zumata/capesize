@@ -11,7 +11,7 @@ go build
 ./capesize <provider> <num hosts>
 ```
 
-example:
+###### Example:
 ```
 AWS_ACCESS_KEY_ID=abc123 \
 AWS_SECRET_ACCESS_KEY=def456 \
