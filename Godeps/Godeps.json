@@ -1,0 +1,14 @@
+{
+	"ImportPath": "github.com/Zumata/capesize",
+	"GoVersion": "go1.3",
+	"Deps": [
+		{
+			"ImportPath": "github.com/crowdmob/goamz/aws",
+			"Rev": "d4fe3562c5ecedfd7984f5d4508d74cda77539bc"
+		},
+		{
+			"ImportPath": "github.com/crowdmob/goamz/ec2",
+			"Rev": "d4fe3562c5ecedfd7984f5d4508d74cda77539bc"
+		}
+	]
+}
