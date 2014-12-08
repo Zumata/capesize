@@ -16,14 +16,14 @@ go build
 ./capesize list amazon
 ```
 
-###### Example:
+###### Example to create 5 docker hosts on Amazon:
 ```
 AWS_ACCESS_KEY_ID=abc123 \
 AWS_SECRET_ACCESS_KEY=def456 \
 SECURITY_GROUP="Backend Servers" \
 EC2_KEY_PAIR_NAME=jenkinskey \
 IDENTITY_FILE=~/.ssh/jenkins_id_rsa" \
-./capesize amazon 5
+./capesize create amazon 5
 ```
 
 ###### Required ENV vars:
