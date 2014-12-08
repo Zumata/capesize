@@ -15,9 +15,9 @@ example:
 ```
 AWS_ACCESS_KEY_ID=abc123 \
 AWS_SECRET_ACCESS_KEY=def456 \
-SECURITY_GROUP="backend" \
-EC2_KEY_PAIR_NAME=awesome_key \
-IDENTITY_FILE=<insert>~/.ssh/jenkins_id_rsa" \
+SECURITY_GROUP="Backend Servers" \
+EC2_KEY_PAIR_NAME=jenkinskey \
+IDENTITY_FILE=~/.ssh/jenkins_id_rsa" \
 ./capesize amazon 5
 ```
 
