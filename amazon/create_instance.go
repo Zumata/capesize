@@ -152,13 +152,13 @@ func (a *Amazon) CreateInstance(machine *core.Machine, done chan bool) {
 
 	ec2Instance := NewSpawnedEC2Instance(machine, a.Client, a.Config)
 	ec2Instance.Run()
-	ec2Instance.AddOrUpdateTag("capesize", "launching")
 
 	// wait for DNS
 	for {
 		ec2Instance.UpdateDNSInfo()
 		ec2Instance.LogStatus()
 		if ec2Instance.RunningWithDNSName() {
+			ec2Instance.AddOrUpdateTag("capesize", "launching")
 			break
 		}
 		time.Sleep(5 * time.Second)
