@@ -2,6 +2,7 @@ package amazon
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/Zumata/capesize/command"
 	"github.com/Zumata/capesize/core"
@@ -33,10 +34,24 @@ func RunAmazonDockerSetup(m *core.Machine) {
 		},
 
 		command.SSHExec{
-			Log:     "Install docker & start service",
+			Log:     "Install docker",
 			Server:  m,
 			Options: []string{"-t", "-t"},
-			Command: "sudo yum install -y docker ; sudo service docker start",
+			Command: "sudo yum install -y docker",
+		},
+
+		command.SSHExec{
+			Log:     "Set options for docker daemon",
+			Server:  m,
+			Options: []string{"-t", "-t"},
+			Command: `sudo tee /etc/sysconfig/docker <<<'OPTIONS="` + os.Getenv("DOCKER_OPTS") + `"' > /dev/null`,
+		},
+
+		command.SSHExec{
+			Log:     "Start service",
+			Server:  m,
+			Options: []string{"-t", "-t"},
+			Command: "sudo service docker start",
 		},
 
 		command.SSHExec{

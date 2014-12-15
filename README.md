@@ -43,6 +43,7 @@ IDENTITY_FILE=~/.ssh/jenkins_id_rsa" \
 * EC2_INSTANCE_TYPE (m3.medium)
 * EC2_AVAILABILITY_ZONE (ap-southeast-1b)
 * REMOTE_DIR_PATH (opt)
+* DOCKER_OPTS (e.g. --insecure-registry xx.xx.xx.xx:5000)
 
 #### Todo
 * Better error handling. i.e. refactor excessive & abusive use of `panic`
