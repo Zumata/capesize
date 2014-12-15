@@ -11,12 +11,18 @@ import (
 var DefaultDeveloperKeys string
 var DefaultRemoteDirPath string
 var DefaultIdentityFile string
+var DefaultSSHParams []string
 
 func init() {
 
 	DefaultDeveloperKeys = config.SetConfig("DEVELOPER_KEYS", "")
 	DefaultRemoteDirPath = config.SetConfig("REMOTE_DIR_PATH", "opt")
 	DefaultIdentityFile = config.SetConfig("IDENTITY_FILE", "")
+
+	DefaultSSHParams = []string{"-oStrictHostKeyChecking=no", "-oUserKnownHostsFile=/dev/null"}
+	if DefaultIdentityFile != "" {
+		DefaultSSHParams = append(DefaultSSHParams, "-oIdentityFile="+DefaultIdentityFile)
+	}
 
 }
 
@@ -41,7 +47,7 @@ type CommandSCP struct {
 
 func (c CommandSCP) Exec() {
 
-	params := []string{"-oStrictHostKeyChecking=no", "-oUserKnownHostsFile=/dev/null", "-oIdentityFile=" + DefaultIdentityFile}
+	params := DefaultSSHParams
 
 	if len(c.Options) > 0 {
 		params = append(params, c.Options...)
@@ -86,7 +92,8 @@ type SSHExec struct {
 
 func (c SSHExec) Exec() {
 
-	params := []string{"-oStrictHostKeyChecking=no", "-oUserKnownHostsFile=/dev/null", "-oIdentityFile=" + DefaultIdentityFile}
+	params := DefaultSSHParams
+
 	if len(c.Options) > 0 {
 		params = append(params, c.Options...)
 	}
@@ -114,7 +121,10 @@ func (c SSHExec) Exec() {
 }
 
 func SSHPing(server Server) error {
-	cmd := exec.Command("ssh", "-oStrictHostKeyChecking=no", "-oUserKnownHostsFile=/dev/null", "-oConnectTimeout=1", "-oIdentityFile="+DefaultIdentityFile, server.User()+"@"+server.Hostname(), "echo 'test' 2>/dev/null || true")
+
+	params := DefaultSSHParams
+	params = append(params, "-oConnectTimeout=1", fmt.Sprintf("%s@%s", server.User(), server.Hostname()), "echo 'test' 2>/dev/null || true")
+	cmd := exec.Command("ssh", params...)
 	var out bytes.Buffer
 	cmd.Stdout = &out
 	err := cmd.Run()
