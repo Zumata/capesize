@@ -191,6 +191,17 @@ func (a *Amazon) CreateInstance(machine *core.Machine, done chan bool) {
 	machine.IPAddress = ec2Instance.IPAddress
 
 	RunAmazonDockerSetup(machine)
+
+	if os.Getenv("DOCKER_RUN_POST_INSTALL") != "" {
+		postInstallCmd := command.SSHExec{
+			Log:     "Running commands post docker installation",
+			Server:  machine,
+			Options: []string{"-n"},
+			Command: os.Getenv("DOCKER_RUN_POST_INSTALL"),
+		}
+		postInstallCmd.Exec()
+	}
+
 	ec2Instance.AddOrUpdateTag("Name", machine.SuccessTag())
 	ec2Instance.AddOrUpdateTag("capesize", "ready")
 
