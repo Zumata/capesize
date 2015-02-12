@@ -9,6 +9,7 @@ import (
 )
 
 var BuildIdentifier string
+var StaticMachineName string
 var DefaultSecurityGroup string
 
 func init() {
