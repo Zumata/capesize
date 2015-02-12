@@ -45,6 +45,7 @@ IDENTITY_FILE=~/.ssh/jenkins_id_rsa" \
 * REMOTE_DIR_PATH (opt)
 * DOCKER_OPTS (e.g. --insecure-registry xx.xx.xx.xx:5000)
 * DOCKER_RUN_POST_INSTALL (e.g. docker run ...; docker run ...)
+* STATIC_MACHINE_NAME (creates machines with a static name, instead of random generation per instance)
 
 #### Todo
 * Better error handling. i.e. refactor excessive & abusive use of `panic`

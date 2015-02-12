@@ -14,6 +14,7 @@ var DefaultSecurityGroup string
 func init() {
 
 	BuildIdentifier = config.SetConfig("BUILD_IDENTIFIER", "capesize")
+	StaticMachineName = config.SetConfig("STATIC_MACHINE_NAME", "")
 	DefaultSecurityGroup = config.SetConfig("SECURITY_GROUP", "")
 
 }
@@ -34,7 +35,7 @@ type ProviderMachineConfig struct {
 func NewMachine(machineConfig ProviderMachineConfig) *Machine {
 	formatted_date := fmt.Sprintf("%d_%s_%d", time.Now().Year(), time.Now().Month(), time.Now().Day())
 	return &Machine{
-		Name:          config.GenerateName(),
+		Name:          getName(),
 		SecurityGroup: DefaultSecurityGroup,
 		Tag:           fmt.Sprintf("_docker_host_%s", formatted_date),
 		Login:         machineConfig.Login,
@@ -60,4 +61,11 @@ func (m *Machine) SuccessTag() string {
 		m.Name,
 		fmt.Sprintf("%d_%s_%d", time.Now().Year(), time.Now().Month(), time.Now().Day()),
 	}, "_")
+}
+
+func getName() string {
+	if StaticMachineName == "" {
+		return config.GenerateName()
+	}
+	return StaticMachineName
 }
